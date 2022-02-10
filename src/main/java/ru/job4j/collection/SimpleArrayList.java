@@ -16,13 +16,17 @@ public class SimpleArrayList<T> implements List<T> {
         this.container = (T[]) new Object[capacity];
     }
 
-    public void expand(T[] arr) {
-        container = Arrays.copyOf(container, container.length * 2);
+    private void expand(T[] arr) {
+        if (container.length == 0) {
+            container = Arrays.copyOf(container, container.length + 1);
+        } else {
+            container = Arrays.copyOf(container, container.length * 2);
+        }
     }
 
     @Override
     public void add(T value) {
-        if (size == container.length - 1) {
+        if (size == container.length) {
             expand(container);
         }
         container[size++] = value;
@@ -31,14 +35,16 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public T set(int index, T newValue) {
-        T rsl = container[Objects.checkIndex(index, size)];
+        Objects.checkIndex(index, size);
+        T rsl = container[index];
         container[index] = newValue;
         return rsl;
     }
 
     @Override
     public T remove(int index) {
-        T rsl = container[Objects.checkIndex(index, size)];
+        Objects.checkIndex(index, size);
+        T rsl = container[index];
         modCount++;
         System.arraycopy(container,
                 index + 1,
@@ -52,7 +58,8 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        return container[Objects.checkIndex(index, size)];
+        Objects.checkIndex(index, size);
+        return container[index];
     }
 
     @Override
@@ -68,9 +75,6 @@ public class SimpleArrayList<T> implements List<T> {
 
             @Override
             public boolean hasNext() {
-                while (index < size && container[index] == null) {
-                    index++;
-                }
                 return index < size;
             }
 
