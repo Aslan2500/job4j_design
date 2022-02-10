@@ -16,10 +16,14 @@ public class SimpleArrayList<T> implements List<T> {
         this.container = (T[]) new Object[capacity];
     }
 
+    public void expand(T[] arr) {
+        container = Arrays.copyOf(container, container.length * 2);
+    }
+
     @Override
     public void add(T value) {
         if (size == container.length - 1) {
-            container = Arrays.copyOf(container, container.length * 2);
+            expand(container);
         }
         container[size++] = value;
         modCount++;
@@ -27,22 +31,20 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public T set(int index, T newValue) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-        T rsl = container[index];
+        T rsl = container[Objects.checkIndex(index, size)];
         container[index] = newValue;
         return rsl;
     }
 
     @Override
     public T remove(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-        T rsl = container[index];
+        T rsl = container[Objects.checkIndex(index, size)];
         modCount++;
-        System.arraycopy(container, index + 1, container, index, container.length - index - 1);
+        System.arraycopy(container,
+                index + 1,
+                container, index,
+                container.length - index - 1
+        );
         container[container.length - 1] = null;
         size--;
         return rsl;
@@ -50,10 +52,7 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-        return container[index];
+        return container[Objects.checkIndex(index, size)];
     }
 
     @Override
@@ -69,10 +68,10 @@ public class SimpleArrayList<T> implements List<T> {
 
             @Override
             public boolean hasNext() {
-                while (index < container.length && container[index] == null) {
+                while (index < size && container[index] == null) {
                     index++;
                 }
-                return index < container.length;
+                return index < size;
             }
 
             @Override
