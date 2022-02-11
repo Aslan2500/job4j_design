@@ -13,6 +13,8 @@ public class SimpleLinkedList<E> implements List<E> {
 
     private int modCount = 0;
 
+    private int size = 0;
+
     @Override
     public void add(E value) {
         if (last == null) {
@@ -20,35 +22,40 @@ public class SimpleLinkedList<E> implements List<E> {
             this.last = nodeOne;
             this.first = nodeOne;
             modCount++;
+            size++;
             return;
         }
         Node<E> newNode = new Node<>(value, null, last);
         last.setNext(newNode);
         this.last = newNode;
         modCount++;
+        size++;
     }
 
     @Override
     public E get(int index) {
-        Objects.checkIndex(index, modCount);
-        Node<E> testNode = first;
-        E rsl = first.getElement();
+        Objects.checkIndex(index, size);
+        Node<E> currentNode = first;
         for (int i = 0; i < index; i++) {
-            rsl = testNode.getNext().getElement();
-            testNode = testNode.getNext();
+            currentNode = currentNode.getNext();
         }
-        return rsl;
+        return currentNode.getElement();
     }
 
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            int index = 0;
-            int expectedModCount = modCount;
+
+            Node<E> header = first;
+
+            final int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
-                return index < modCount;
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return header != null;
             }
 
             @Override
@@ -56,12 +63,10 @@ public class SimpleLinkedList<E> implements List<E> {
                 if (!iterator().hasNext()) {
                     throw new NoSuchElementException();
                 }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
-                return get(index++);
+                E rsl = header.getElement();
+                header = header.getNext();
+                return rsl;
             }
         };
     }
-
 }
