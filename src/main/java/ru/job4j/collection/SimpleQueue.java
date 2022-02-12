@@ -5,7 +5,6 @@ public class SimpleQueue<T> {
     private final SimpleStack<T> out = new SimpleStack<>();
 
     public T poll() {
-        SimpleStack<T> saver = out;
         while (!out.isEmpty()) {
             in.push(out.pop());
         }
