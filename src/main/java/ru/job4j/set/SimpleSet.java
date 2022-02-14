@@ -3,7 +3,6 @@ package ru.job4j.set;
 import ru.job4j.collection.SimpleArrayList;
 
 import java.util.Iterator;
-import java.util.function.Predicate;
 
 public class SimpleSet<T> implements Set<T> {
 
@@ -12,20 +11,9 @@ public class SimpleSet<T> implements Set<T> {
     @Override
     public boolean add(T value) {
         boolean rsl = true;
-        Iterator<T> iterator = set.iterator();
-        while (iterator.hasNext()) {
-            T next = iterator.next();
-            if (next == null) {
-                if (value == null) {
-                    rsl = false;
-                    break;
-                }
-            } else if (next.equals(value)) {
-                rsl = false;
-                break;
-            }
-        }
-        if (rsl) {
+        if (contains(value)) {
+            rsl = false;
+        } else  {
             set.add(value);
         }
         return rsl;
@@ -37,7 +25,7 @@ public class SimpleSet<T> implements Set<T> {
         Iterator<T> iterator = set.iterator();
         while (iterator.hasNext()) {
             T next = iterator.next();
-            if (next == null || value == null) {
+            if (next == null) {
                 if (value == null) {
                     rsl = true;
                     break;

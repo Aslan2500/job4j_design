@@ -5,3 +5,4 @@ public interface Set<T> extends Iterable<T> {
 
     boolean contains(T value);
 }
+
