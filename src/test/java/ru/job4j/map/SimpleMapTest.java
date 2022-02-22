@@ -34,6 +34,24 @@ public class SimpleMapTest {
     }
 
     @Test
+    public void putAndExpand() {
+        SimpleMap<Integer, String> map = new SimpleMap<>();
+        boolean rsl = map.put(0, "0");
+        boolean rsl2 = map.put(1, "1");
+        boolean rsl3 = map.put(2, "2");
+        boolean rsl4 = map.put(3, "3");
+        boolean rsl5 = map.put(4, "4");
+        boolean rsl6 = map.put(5, "5");
+        boolean rsl7 = map.put(6, "6");
+        boolean rsl8 = map.put(7, "7");
+        boolean rsl9 = map.put(8, "8");
+        boolean rsl10 = map.put(9, "9");
+        boolean rsl11 = map.put(10, "9");
+        boolean rsl12 = map.put(11, "10");
+        assertTrue(rsl12);
+    }
+
+    @Test
     public void get123AndPutInTheSameBucket() {
         SimpleMap<Integer, String> map = new SimpleMap<>();
         boolean rsl = map.put(0, "123");
@@ -89,18 +107,18 @@ public class SimpleMapTest {
     }
 
     @Test
-    public void iteratorHasNext() {
+    public void iteratorHasNextThanNull() {
         SimpleMap<Integer, String> map = new SimpleMap<>();
         map.put(0, "First");
         map.put(1, "Second");
-        map.put(2, "Third");
+        map.put(3, "Third");
         Iterator<Integer> iter = map.iterator();
         assertTrue(iter.hasNext());
         assertThat(iter.next(), is(0));
         assertTrue(iter.hasNext());
         assertThat(iter.next(), is(1));
         assertTrue(iter.hasNext());
-        assertThat(iter.next(), is(2));
+        assertThat(iter.next(), is(3));
         assertFalse(iter.hasNext());
     }
 }
