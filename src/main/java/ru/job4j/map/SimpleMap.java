@@ -21,7 +21,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public boolean put(K key, V value) {
         int hashCode = hash(key.hashCode());
         int bucket = indexFor(hashCode);
-        if (count == capacity * LOAD_FACTOR) {
+        if (count >= capacity * LOAD_FACTOR) {
             expand();
         }
         boolean rsl = table[bucket] == null;
@@ -47,6 +47,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
         capacity *= 2;
         Iterator<K> iterator = this.iterator();
         while (iterator.hasNext()) {
+            if (iterator.next() != null) {
+                continue;
+            }
             K key = iterator.next();
             V value = get(key);
             int hashCode = hash(key.hashCode());
@@ -83,18 +86,18 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return bucket < count;
             }
 
             @Override
             public K next() {
-                if (!iterator().hasNext()) {
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
-                if (table[bucket] == null) {
+                while (table[bucket] == null) {
                     bucket++;
                 }
                 return table[bucket++].key;

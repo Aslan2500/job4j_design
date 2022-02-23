@@ -48,7 +48,12 @@ public class SimpleMapTest {
         boolean rsl10 = map.put(9, "9");
         boolean rsl11 = map.put(10, "9");
         boolean rsl12 = map.put(11, "10");
-        assertTrue(rsl12);
+        boolean rsl13 = map.put(12, "10");
+        boolean rsl14 = map.put(13, "10");
+        boolean rsl15 = map.put(14, "10");
+        boolean rsl16 = map.put(15, "10");
+        boolean rsl17 = map.put(16, "10");
+        assertTrue(rsl17);
     }
 
     @Test
