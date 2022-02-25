@@ -57,6 +57,23 @@ public class SimpleMapTest {
     }
 
     @Test
+    public void put7AndExpand() {
+        SimpleMap<Integer, String> map = new SimpleMap<>();
+        boolean rsl = map.put(0, "0w");
+        assertTrue(rsl);
+        String s0 = map.get(0);
+        assertSame("0w", s0);
+        boolean rsl2 = map.put(1, "1");
+        boolean rsl3 = map.put(2, "2");
+        boolean rsl4 = map.put(3, "3");
+        boolean rsl5 = map.put(4, "4");
+        boolean rsl6 = map.put(5, "5");
+        boolean rsl7 = map.put(6, "6");
+        String s1 = map.get(1);
+        assertSame("1", s1);
+    }
+
+    @Test
     public void get123AndPutInTheSameBucket() {
         SimpleMap<Integer, String> map = new SimpleMap<>();
         boolean rsl = map.put(0, "123");

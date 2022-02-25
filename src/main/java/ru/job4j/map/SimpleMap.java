@@ -47,10 +47,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
         capacity *= 2;
         Iterator<K> iterator = this.iterator();
         while (iterator.hasNext()) {
-            if (iterator.next() != null) {
+            K key = iterator.next();
+            if (key == null) {
                 continue;
             }
-            K key = iterator.next();
             V value = get(key);
             int hashCode = hash(key.hashCode());
             int bucket = indexFor(hashCode);
