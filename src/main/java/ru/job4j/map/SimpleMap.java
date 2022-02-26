@@ -74,6 +74,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
             table[indexFor(key.hashCode())].key = null;
             table[indexFor(key.hashCode())].value = null;
             rsl = true;
+            count--;
+            modCount--;
         }
         return rsl;
     }
