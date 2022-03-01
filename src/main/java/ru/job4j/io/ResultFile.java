@@ -5,30 +5,28 @@ import java.util.Arrays;
 
 public class ResultFile {
     public static void main(String[] args) {
-        int[][] matrix = multiple(10);
+        int size = 10;
+        ResultFile rsl = new ResultFile();
+        rsl.resultMatrix(size);
+    }
+
+    public void resultMatrix(int size) {
+        int[][] matrix = new int[size][size];
         try (FileOutputStream out = new FileOutputStream("result.txt")) {
-            for (int[] ints : matrix) {
-                for (int j = 0; j < ints.length; j++) {
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
                     if (j == 0) {
-                        System.out.print("" + ints[j]);
+                        matrix[i][j] = (i + 1) * (j + 1);
+                        out.write(("" + matrix[i][j]).getBytes());
                     } else {
-                        System.out.print(", " + ints[j]);
+                        matrix[i][j] = (i + 1) * (j + 1);
+                        out.write((", " + matrix[i][j]).getBytes());
                     }
                 }
-                System.out.println();
+                out.write(System.lineSeparator().getBytes());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static int[][] multiple(int size) {
-        int[][] matrix = new int[size][size];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                matrix[i][j] = (i + 1) * (j + 1);
-            }
-        }
-        return matrix;
     }
 }
