@@ -1,24 +1,39 @@
 package ru.job4j.io;
 
-import ru.job4j.list.List;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.function.Predicate;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LogFilter {
-    public List<String> filter(String file) {
+    public static List<String> filter(String file) {
+        List<String> rsl = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            in.lines().filter(s -> s.contains(" 404 ")).forEach(System.out::println);
+            rsl = in.lines().filter(s -> {
+                String[] words = s.split(" ");
+                return "404".equals(words[words.length - 2]);
+            }).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return rsl;
+    }
+
+    public static void save(List<String> log, String file) {
+        try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
+            if (log != null) {
+                for (int i = 0; i < log.size(); i++) {
+                    out.write(log.get(i) + "");
+                    out.write(System.lineSeparator());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
-        LogFilter logFilter = new LogFilter();
-        List<String> log = logFilter.filter("log.txt");
-        System.out.println(log);
+        List<String> log = filter("log.txt");
+        save(log, "404.txt");
     }
 }
