@@ -13,7 +13,7 @@ public class LogFilter {
                 String[] words = s.split(" ");
                 return "404".equals(words[words.length - 2]);
             }).collect(Collectors.toList());
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return rsl;
@@ -22,12 +22,12 @@ public class LogFilter {
     public static void save(List<String> log, String file) {
         try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
             if (log != null) {
-                for (int i = 0; i < log.size(); i++) {
-                    out.write(log.get(i) + "");
+                for (String s : log) {
+                    out.println(s + "");
                     out.write(System.lineSeparator());
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
