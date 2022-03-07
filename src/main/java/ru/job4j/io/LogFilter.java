@@ -23,8 +23,7 @@ public class LogFilter {
         try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
             if (log != null) {
                 for (String s : log) {
-                    out.println(s + "");
-                    out.write(System.lineSeparator());
+                    out.println(s);
                 }
             }
         } catch (IOException e) {
