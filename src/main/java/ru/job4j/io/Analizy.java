@@ -20,11 +20,10 @@ public class Analizy {
                     }
                     if (("200".equals(rsl[0]) || "300".equals(rsl[0])) && flag) {
                         out.write(rsl[1].getBytes());
+                        out.write(System.lineSeparator().getBytes());
                         flag = false;
                     }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         } catch (IOException e) {
             e.printStackTrace();
