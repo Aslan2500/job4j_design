@@ -20,6 +20,7 @@ public class Analizy {
                     }
                     if (("200".equals(rsl[0]) || "300".equals(rsl[0])) && flag) {
                         out.write(rsl[1].getBytes());
+                        out.write(";".getBytes());
                         out.write(System.lineSeparator().getBytes());
                         flag = false;
                     }
