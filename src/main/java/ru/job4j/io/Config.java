@@ -31,8 +31,12 @@ public class Config {
                     })
                     .collect(Collectors.toList());
             for (String s : list) {
-                String[] res = s.split("=");
-                values.put(res[0], res[1]);
+                if (s.contains("=")) {
+                    String[] res = s.split("=");
+                    values.put(res[0], res[1]);
+                } else {
+                    throw new IllegalArgumentException();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

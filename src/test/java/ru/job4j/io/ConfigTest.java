@@ -1,9 +1,6 @@
 package ru.job4j.io;
 
-import org.hamcrest.Matchers;
 import org.junit.Test;
-
-import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -22,8 +19,15 @@ public class ConfigTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenExceptionOccurs() {
+    public void whenExceptionOccursSymbolInTheWrongPlace() {
         String path = "./data.properties";
+        Config config = new Config(path);
+        config.load();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenExceptionOccursWrongSymbol() {
+        String path = "./test.properties";
         Config config = new Config(path);
         config.load();
     }
