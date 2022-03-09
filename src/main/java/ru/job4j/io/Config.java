@@ -34,8 +34,7 @@ public class Config {
                 if (!s.contains("=")) {
                     throw new IllegalArgumentException();
                 }
-                String[] res = new String[2];
-                res = s.split("=");
+                String[] res = s.split("=", 2);
                 values.put(res[0], res[1]);
             }
         } catch (IOException e) {
