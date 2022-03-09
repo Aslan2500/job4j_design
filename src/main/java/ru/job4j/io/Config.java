@@ -31,12 +31,12 @@ public class Config {
                     })
                     .collect(Collectors.toList());
             for (String s : list) {
-                if (s.contains("=")) {
-                    String[] res = s.split("=");
-                    values.put(res[0], res[1]);
-                } else {
+                if (!s.contains("=")) {
                     throw new IllegalArgumentException();
                 }
+                String[] res = new String[2];
+                res = s.split("=");
+                values.put(res[0], res[1]);
             }
         } catch (IOException e) {
             e.printStackTrace();
