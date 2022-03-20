@@ -10,7 +10,7 @@ public class DuplicatesFinder {
         listOfDuplicates();
     }
 
-    public static List<FileProperty> listOfDuplicates() throws IOException {
+    public static List<List<Path>> listOfDuplicates() throws IOException {
         DuplicatesVisitor duplicatesVisitor = new DuplicatesVisitor();
         Files.walkFileTree(Path.of("./"), duplicatesVisitor);
         return duplicatesVisitor.finderDuplicate();

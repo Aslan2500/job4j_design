@@ -25,10 +25,10 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         return FileVisitResult.CONTINUE;
     }
 
-    public List<FileProperty> finderDuplicate() {
+    public List<List<Path>> finderDuplicate() {
         return files.entrySet().stream()
                 .filter(s -> s.getValue().size() > 1)
-                .map(Map.Entry::getKey)
+                .map(Map.Entry::getValue)
                 .collect(Collectors.toList());
     }
 }
