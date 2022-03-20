@@ -19,7 +19,7 @@ public class ArgsName {
                 continue;
             }
             String[] rsl = s.split("=", 2);
-            if (rsl[1].isEmpty()) {
+            if (rsl[0].isEmpty() || rsl[1].isEmpty()) {
                 throw new IllegalArgumentException();
             }
             if (rsl[0].startsWith("-")) {
