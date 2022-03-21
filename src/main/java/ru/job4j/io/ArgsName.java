@@ -19,11 +19,12 @@ public class ArgsName {
                 continue;
             }
             String[] rsl = s.split("=", 2);
-            if (rsl[0].isEmpty() || rsl[1].isEmpty()) {
+            if (rsl[0].isEmpty() || rsl[1].isEmpty() || !rsl[0].startsWith("-")) {
                 throw new IllegalArgumentException();
             }
-            if (rsl[0].startsWith("-")) {
-                rsl[0] = rsl[0].substring(1);
+            rsl[0] = rsl[0].substring(1);
+            if (rsl[0].isEmpty()) {
+                throw new IllegalArgumentException();
             }
             values.put(rsl[0], rsl[1]);
         }
