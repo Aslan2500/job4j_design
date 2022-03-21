@@ -32,9 +32,14 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
                 .collect(Collectors.toList());
     }
 
-    public void listOfDuplicates() throws IOException {
+    public void listOfDuplicates(String catalog) throws IOException {
         DuplicatesVisitor duplicatesVisitor = new DuplicatesVisitor();
-        Files.walkFileTree(Path.of("."), duplicatesVisitor);
-        System.out.println(duplicatesVisitor.finderDuplicate());
+        Files.walkFileTree(Path.of(catalog), duplicatesVisitor);
+        List<List<Path>> rsl = duplicatesVisitor.finderDuplicate();
+        for (List<Path> list : rsl) {
+            for (Path res : list) {
+                System.out.println(res);
+            }
+        }
     }
 }
