@@ -46,4 +46,3 @@ public class ArgsNameTest {
         ArgsName jvm = ArgsName.of(new String[] {"-=512"});
     }
 }
-

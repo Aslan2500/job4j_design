@@ -15,18 +15,17 @@ public class ArgsName {
 
     private void parse(String[] args) {
         for (String s : args) {
-            if (!s.contains("=")) {
-                continue;
-            }
+            validate(s);
             String[] rsl = s.split("=", 2);
-            if (rsl[0].isEmpty() || rsl[1].isEmpty() || !rsl[0].startsWith("-")) {
-                throw new IllegalArgumentException();
-            }
             rsl[0] = rsl[0].substring(1);
-            if (rsl[0].isEmpty()) {
-                throw new IllegalArgumentException();
-            }
             values.put(rsl[0], rsl[1]);
+        }
+    }
+
+    public static void validate(String s) {
+        if (!s.startsWith("-") || !s.contains("=")
+                || s.startsWith("-=") || s.indexOf("=") == s.length() - 1) {
+            throw new IllegalArgumentException();
         }
     }
 
