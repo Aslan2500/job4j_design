@@ -8,7 +8,7 @@ public class ArgsName {
 
     public String get(String key) {
         if (!values.containsKey(key)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("There is no such key");
         }
         return values.get(key);
     }
@@ -25,7 +25,7 @@ public class ArgsName {
     public static void validate(String s) {
         if (!s.startsWith("-") || !s.contains("=")
                 || s.startsWith("-=") || s.indexOf("=") == s.length() - 1) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Pattern violation");
         }
     }
 
