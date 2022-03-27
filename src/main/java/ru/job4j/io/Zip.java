@@ -20,19 +20,21 @@ public class Zip {
         }
     }
 
-    public void packSingleFile(File source, File target) {
-        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
-            zip.putNextEntry(new ZipEntry(source.getPath()));
-            try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
-                zip.write(out.readAllBytes());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) throws IOException {
+        File file = new File(args[0]);
+        if (args.length != 3) {
+            throw new IllegalArgumentException("Not enough parameters");
+        }
+        if (!file.exists()) {
+            throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
+        }
+        if (!file.isDirectory()) {
+            throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
+        }
         ArgsName name = ArgsName.of(args);
+        if (!name.get("e").startsWith(".")) {
+            throw new IllegalArgumentException("Inappropriate format of files for exception");
+        }
         Path directory = Path.of(name.get("d"));
         String exclude = name.get("e");
         List<Path> list = Search.search(directory, path -> !path.toFile().getName().endsWith(exclude));
