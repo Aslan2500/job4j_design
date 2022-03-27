@@ -21,17 +21,17 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File(args[0]);
         if (args.length != 3) {
             throw new IllegalArgumentException("Not enough parameters");
         }
+        ArgsName name = ArgsName.of(args);
+        File file = new File(name.get("d"));
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
-        ArgsName name = ArgsName.of(args);
         if (!name.get("e").startsWith(".")) {
             throw new IllegalArgumentException("Inappropriate format of files for exception");
         }
