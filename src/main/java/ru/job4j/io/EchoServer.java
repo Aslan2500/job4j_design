@@ -14,7 +14,7 @@ public class EchoServer {
                              new InputStreamReader(socket.getInputStream()))) {
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     String input = in.readLine();
-                    if (input.contains("Bye")) {
+                    if (input.contains("/?msg=Bye ")) {
                         server.close();
                     }
                     for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
