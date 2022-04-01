@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<vehicle isExpensive="true" numOfWheels="4" brand="Porsche">
+    <options>
+        <option>Music</option>
+        <option>Sport</option>
+    </options>
+    <driver yearsOfExpirience="10"/>
+</vehicle>
