@@ -1,13 +1,9 @@
 package ru.job4j.serialization;
 
-import java.util.Arrays;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import java.util.Arrays;
 import javax.xml.bind.annotation.*;
-import java.io.StringWriter;
 
 @XmlRootElement(name = "vehicle")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -29,6 +25,26 @@ public class Vehicle {
 
     public Vehicle() {
 
+    }
+
+    public boolean isExpensive() {
+        return isExpensive;
+    }
+
+    public int getNumOfWheels() {
+        return numOfWheels;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String[] getOptions() {
+        return options;
+    }
+
+    public Driver getDriver() {
+        return driver;
     }
 
     public Vehicle(boolean isExpensive, int numOfWheels, String brand, String[] options, Driver driver) {

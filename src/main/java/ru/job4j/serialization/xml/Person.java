@@ -18,6 +18,22 @@ public class Person {
     private int age;
     private Contact contact;
 
+    public boolean isSex() {
+        return sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public String[] getStatuses() {
+        return statuses;
+    }
+
     @XmlElementWrapper(name = "statuses")
     private String[] statuses;
 
