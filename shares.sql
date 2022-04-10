@@ -23,4 +23,19 @@ insert into shareholders (name, companies_id) values ('Genadii', 3);
 insert into shareholders (name, companies_id) values ('Ruslan', 3);
 insert into shareholders (name, companies_id) values ('Liza', 3);
 
-select ss.name as Имя, cc.name as Название from shareholders as ss join companies as cc on ss.companies_id = cc.id;
+select ss.name as Имя,
+cc.name as Название
+from shareholders as ss 
+join companies as cc
+on ss.companies_id = cc.id;
+
+select * from shareholders as ss
+join companies as cc
+on ss.companies_id = cc.id and cc.id < 3;
+
+select ss.name as Имя,
+cc.name as Название
+from shareholders as ss 
+join companies as cc
+on ss.companies_id = cc.id
+where cc.name = 'Apple';
