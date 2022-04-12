@@ -33,8 +33,9 @@ select * from employers e cross join departments d;
 select * from departments d left join employers e on e.departments_id = d.id where e.id is null;
 
 select * from employers e left join departments d on e.departments_id = d.id;
-select * from departments d right join employers e on e.departments_id = d.id;
-select * from employers e right join departments d on e.departments_id = d.id;
+select e.id, e.name, e.departments_id, d.id, d.name from departments d right join employers e on e.departments_id = d.id;
+
+select d.id, d.name, e.id, e.name, e.departments_id from employers e right join departments d on e.departments_id = d.id;
 select * from departments d left join employers e on e.departments_id = d.id;
 
 create table teens(
