@@ -27,11 +27,19 @@ insert into product (name, type_id, expired_date, price) values ('Молоко �
 select * from type;
 select * from product;
 
-select p.name from product p where p.type_id = 1;
+select p.name 
+from product p
+join type t
+on t.id = p.type_id
+where t.name = 'Сыр';
 
-select p.name from product p where p.name like '%мороженое%';
+select p.name 
+from product p 
+where p.name like '%мороженое%';
 
-select p.name from product p where current_date > p.expired_date;
+select p.name 
+from product p 
+where current_date > p.expired_date;
 
 select p.name, p.price
 from product p 
@@ -43,7 +51,12 @@ join product p
 on t.id = p.type_id
 group by t.name;
 
-select p.name from product p where p.type_id = 1 or p.type_id = 3;
+select p.name 
+from product p
+join type t
+on t.id = p.type_id
+where (t.name = 'Сыр'
+or  t.name = 'Молоко');
 
 select t.name, count(p)
 from type t
@@ -55,4 +68,4 @@ having count(p) < 10;
 select p.name, t.name
 from type t
 join product p
-on t.id = p.type_id;
+on t.id = p.type_id; 
