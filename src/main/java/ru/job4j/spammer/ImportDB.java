@@ -24,7 +24,7 @@ public class ImportDB {
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach(line -> {
                 String[] elements = line.split(";", 2);
-                if (elements.length != 2) {
+                if (elements.length != 2 || elements[0].isEmpty() || elements[1].isEmpty()) {
                     throw new IllegalArgumentException("Not enough variables");
                 }
                 users.add(new User(elements[0], elements[1]));
