@@ -1,7 +1,5 @@
 package ru.job4j.jdbc;
 
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
