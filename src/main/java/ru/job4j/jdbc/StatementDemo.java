@@ -16,10 +16,14 @@ public class StatementDemo {
     public static void main(String[] args) throws Exception {
         try (Connection connection = getConnection()) {
             try (Statement statement = connection.createStatement()) {
+//                String sql = String.format(
+//                        "create table if not exists demo_table(%s, %s);",
+//                        "id serial primary key",
+//                        "name text"
+//                );
                 String sql = String.format(
-                        "create table if not exists demo_table(%s, %s);",
-                        "id serial primary key",
-                        "name text"
+                        "create table if not exists demo_table(%s);",
+                        "id serial primary key"
                 );
                 statement.execute(sql);
                 System.out.println(getTableScheme(connection, "demo_table"));
