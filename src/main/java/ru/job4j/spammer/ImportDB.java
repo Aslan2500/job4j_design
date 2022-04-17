@@ -23,14 +23,14 @@ public class ImportDB {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach(line -> {
-                String[] elements = line.split(";", 2);
+                String[] elements = line.split(";");
                 if (elements.length != 2 || elements[0].isEmpty() || elements[1].isEmpty()) {
                     throw new IllegalArgumentException("Not enough variables");
                 }
                 users.add(new User(elements[0], elements[1]));
             });
-            return users;
         }
+        return users;
     }
 
     public void save(List<User> users) throws ClassNotFoundException, SQLException {
