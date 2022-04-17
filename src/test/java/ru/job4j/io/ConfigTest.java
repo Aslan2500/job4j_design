@@ -9,7 +9,7 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithoutComment() {
-        String path = "./app.properties";
+        String path = "./oldApp.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
