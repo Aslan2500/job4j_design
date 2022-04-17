@@ -26,6 +26,8 @@ public class ImportDB {
                 String[] arg = s.split(";");
                 if (arg.length > 1) {
                     users.add(new User(arg[0], arg[1]));
+                } else {
+                    throw new IllegalArgumentException("Not enough variables");
                 }
             });
         }
