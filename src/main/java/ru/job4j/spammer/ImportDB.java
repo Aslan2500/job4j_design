@@ -19,17 +19,33 @@ public class ImportDB {
         this.dump = dump;
     }
 
-    public List<User> load() throws IOException {
+//    public List<User> load() throws IOException {
+//        List<User> users = new ArrayList<>();
+//        try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
+//            rd.lines().forEach(s -> {
+//                String[] arg = s.split(";");
+//                if (arg.length > 1) {
+//                    users.add(new User(arg[0], arg[1]));
+//                } else {
+//                    throw new IllegalArgumentException("Not enough variables");
+//                }
+//            });
+//        }
+//        return users;
+//    }
+
+    public List<User> load() {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach(s -> {
                 String[] arg = s.split(";");
-                if (arg.length > 1) {
-                    users.add(new User(arg[0], arg[1]));
-                } else {
+                if (arg.length < 1 || arg[0].isEmpty() || arg[1].isEmpty()) {
                     throw new IllegalArgumentException("Not enough variables");
                 }
+                users.add(new User(arg[0], arg[1]));
             });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return users;
     }
